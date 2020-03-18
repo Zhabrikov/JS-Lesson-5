@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Nova+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div>
+            <span class="stopwatch" id="stopwatch">00:00:00</span>
+        </div>
+        <div>
+            <input type="button" value="Круг" class="lap" id="lap">
+            <input type="button" value="Сброс" class="discharge" id="discharge">
+            <input type="button" value="Старт" class="start" id="start">
+            <input type="button" value="Стоп" class="stop" id="stop">
+        </div>
+        
+        <div class="laps" id="laps">
+            <table  cellpadding="10">
+                <thead>
+                    <th>Круг</th>
+                    <th>Время</th>
+                    <th>Общее время</th>
+                </thead>
+                <tbody class="tbodyTable" id="tbodyTable">             
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="./js/script.js"></script>
+</body>
+</html>
