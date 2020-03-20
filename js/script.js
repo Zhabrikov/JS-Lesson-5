@@ -70,7 +70,7 @@ function runMainTimer(){
         mainTimerS = 0;
         mainTimerM++;
     }
-    stopwatch.innerText = getMainTimer(mainTimerMs, mainTimerS, mainTimerM);
+    stopwatch.innerText = getTimer(mainTimerMs, mainTimerS, mainTimerM);
 }
 
 function runSmallTimer(){
@@ -89,7 +89,7 @@ function runSmallTimer(){
 
 
 
-function getMainTimer(ms, s, m){
+function getTimer(ms, s, m){
     return (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s) + ":" + (ms < 10 ? "0" + ms : ms);
 }
 
@@ -114,51 +114,55 @@ function stop(timer){
 }
 
 var count = 0;
+var newTr;
+var newTdCount;
+var newTdTime;
+var newTdTotalTime;
+
+function creatElements(){
+    newTr = document.createElement('tr');
+    newTdCount = document.createElement('td');
+    newTdTime = document.createElement('td');
+    newTdTotalTime = document.createElement('td');
+}
+
+function addElementsInHtml(){
+    tbodyTable.prepend(newTr);
+    newTr.append(newTdCount);
+    newTr.append(newTdTime);
+    newTr.append(newTdTotalTime);
+}
+
+function updateTimers(){
+    newTdTime.innerText = getTimer(smallTimerMs, smallTimerS, smallTimerM);
+    newTdTotalTime.innerText = getTimer(mainTimerMs, mainTimerS, mainTimerM);
+}
+
 function lapfirst(){
     smallTimerMs = 0;
     smallTimerS = 0;
     smallTimerM = 0;
+
     clearInterval(smallTimer);
     smallTimer = setInterval(runSmallTimer, 10);
     
-    
-    var newTr = document.createElement('tr');
-    var newTdCount = document.createElement('td');
-    var newTdTime = document.createElement('td');
-    var newTdTotalTime = document.createElement('td');
+    creatElements();    
     
     newTdCount.innerText = count;
-    setInterval(function(){
-        newTdTime.innerText = getMainTimer(smallTimerMs, smallTimerS, smallTimerM);
-    }, 10);
-    
-    setInterval(function(){
-    newTdTotalTime.innerText = getMainTimer(mainTimerMs, mainTimerS, mainTimerM);
-    }, 10);
 
-    tbodyTable.prepend(newTr);
-        newTr.append(newTdCount);
-        newTr.append(newTdTime);
-        newTr.append(newTdTotalTime);
-    
+    setInterval(updateTimers, 10);  
+    addElementsInHtml();  
     
 }
 
 function lap(){
     laps.style.display = 'flex';
-    var newTr = document.createElement('tr');
-    var newTdCount = document.createElement('td');
-    var newTdTime = document.createElement('td');
-    var newTdTotalTime = document.createElement('td');
+    creatElements();
+
     count++;
     newTdCount.innerText = count;   
-    newTdTime.innerText = getMainTimer(smallTimerMs, smallTimerS, smallTimerM);  
-    
-    newTdTotalTime.innerText = getMainTimer(mainTimerMs, mainTimerS, mainTimerM);    
 
-    tbodyTable.prepend(newTr);
-        newTr.append(newTdCount);
-        newTr.append(newTdTime);
-        newTr.append(newTdTotalTime);
+    updateTimers(); 
+    addElementsInHtml();
 
 }
